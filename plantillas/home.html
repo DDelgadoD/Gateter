@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2 class="p-3 mb-2">{% block miau %}Últimos maullidos{% endblock %}</h2>
+	{% if miaus|length %}
+	<header id="miaus"></header>
+	<ul class="mx-auto w-75 p-2 mb-2 list-group">
+		{% for miau in miaus %}
+		<li class="m-3 list-group-item flex-column align-items-start border-top">
+			<div class="d-flex w-100 justify-content-between">
+				<h5><a href="/profile/{{ miau.user }}">{{ miau.user }}</a></h5>
+				<p><small>Publicado el: {{miau.fecha}}</small></p>
+			</div>
+			<p class="mb-1">{{ miau.contenido }}</p>
+			</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<h3 class="p-3 mb-2">¡Sé el primero en Maullar!</h3>
+	{% endif %}
+
+{% endblock %}

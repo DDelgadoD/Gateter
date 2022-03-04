@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2 class="p-3 mb-2">Perfil de {{ name }}</h2>
+		{% if user.username == name %}
+		<div class="p-3 mb-2 mx-auto w-75">
+			<form action="/maullido/" method="post">
+				{% csrf_token %}
+				{% block respuesta %}{% endblock %}
+				<p> Envía tus maullidos!</p>
+				<div class="d-flex">
+					<textarea name="content" maxlength="140" rows="5" cols="100">{% block textarea %}{% endblock %}</textarea><br>
+					<input class="btn btn-success ml-auto p-2" type="submit" value="Maullido">
+				</div>
+			</form>
+		</div>
+		{% endif %}
+		<h3 class="p-3 mb-2">{% block miau %}
+			{% if user.username == name %}
+				Tus maullidos
+			{% else %}
+				maullidos de {{ name }}
+			{% endif %}
+		{% endblock %}</h3>
+
+		{% if miaus|length %}
+		<header id="miaus"></header>
+			<ul class="mx-auto w-75 p-2 mb-2 list-group">
+			{% for miau in miaus %}
+				<li class="m-3 list-group-item flex-column align-items-start border-top">
+					<div class="d-flex w-100 justify-content-between">
+						<h5><a href="/profile/{{ miau.user }}">{{ miau.user }}</a></h5>
+						<p><small>Publicado el: {{miau.fecha}}</small></p>
+					</div>
+					<p class="mb-1">{{ miau.contenido }}</p>
+				</li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<h3 class="p-3 mb-2">No se ha maullado nada todavía</h3>
+		{% endif %}
+{% endblock %}
