@@ -3,7 +3,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 # Imports para presentar la plantilla y para redirigir a otra página en caso necesario
 from django.shortcuts import render, redirect
-from Gateter.models import *
+from Gateter.models import Miau
+from django.contrib.auth.models import User
 # Import para usar fechas en concreto para darle a los miaus la fecha actual
 import datetime
 
