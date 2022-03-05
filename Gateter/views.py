@@ -25,17 +25,17 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             # Enviamos al usuario a la página principal
-            result = redirect('/profile/' + request.user.username)
+            response = redirect('/profile/' + request.user.username)
         else:
             # Si no es valido devolvemos los errores
-            result = render(request, 'signup.html', {'form': form})
+            response = render(request, 'signup.html', {'form': form})
     else:
         # Si es la primera vez que estamos en la web
         form = UserCreationForm()
-        result = render(request, 'signup.html', {'form': form})
+        response = render(request, 'signup.html', {'form': form})
     # Devolvemos la plantilla signup.html donde le pasamos los valores creados por UserCreationForm() ya sea vacío o con
     # los errores que haya encontrado el registro
-    return result
+    return response
 
 
 # Segunda página que solicita el documento: página principal. Debera mostrar los 10 últimos mensajes ordenados de más
@@ -68,11 +68,9 @@ def users(request, name=None):
     context = {
         'name': user.username,
         'miaus': user.miau_set.all().order_by('-fecha')
-    }
+    } 
 
-    result = render(request, 'user.html', context)
-
-    return result
+    return render(request, 'user.html', context)
 
 
 # En la tercera página se solicita que si el usuario es el mismo que está identificado haya una caja para escribir
