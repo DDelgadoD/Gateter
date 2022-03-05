@@ -3,11 +3,12 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-
-<h2 class="p-3 mb-2">Registro</h2>
-<form method="post" class="p-3 mb-2">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Ingresar</button>
- </form>
+<div id="warpper" class="mx-auto w-75" style="background: white">
+    <h2 class="p-3 mb-2">Acceder</h2>
+    <form method="post" class="p-3 mb-2">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Ingresar</button>
+     </form>
+<div>
 {% endblock %}
